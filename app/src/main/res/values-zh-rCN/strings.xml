@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~  Copyrights (C) Haoqing Deng<admin@denghaoqing.com> All rights reserved
+  ~  This file is part of the project SYSU_UEMS
+  -->
+
+<resources>
+    <string name="app_name">中大教务</string>
+    <string name="prompt_netID">NetID</string>
+    <string name="prompt_captcha">验证码</string>
+    <string name="prompt_password">密码</string>
+    <string name="action_sign_in">登录</string>
+    <string name="action_sign_in_short">登录</string>
+    <string name="title_activity_casauth">中央身份验证服务(CAS)</string>
+    <string name="monday">周一</string>
+    <string name="tuesday">周二</string>
+    <string name="wednesday">周三</string>
+    <string name="thursday">周四</string>
+    <string name="friday">周五</string>
+    <string name="saturday">周六</string>
+    <string name="sunday">周日</string>
+    <string name="section_brief">%s 第%s-%s节\n%s~%s</string>
+    <string name="add_memo">添加备忘</string>
+    <string name="menu_login">登录</string>
+    <string name="menu_sync">同步数据</string>
+    <string name="menu_schedule">课程表</string>
+    <string name="menu_achievement">成绩查询</string>
+    <string name="menu_lesson">课程库查询</string>
+    <string name="menu_uems">教务系统</string>
+    <string name="menu_actions">操作</string>
+    <string name="menu_curriculum">专业培养计划</string>
+    <string name="menu_feedback">反馈</string>
+    <string name="menu_settings">设置</string>
+    <string name="menu_select">选课系统</string>
+    <string name="menu_logout">退出登录</string>
+    <string name="captcha_incorrect">验证码错误</string>
+    <string name="error_incorrect_password">用户名或密码错误</string>
+    <string name="action_settings">设置</string>
+    <string name="gpa">绩点</string>
+    <string name="credits">%s学分</string>
+    <string name="third_semester">第三学期</string>
+    <string name="second_semester">第二学期</string>
+    <string name="first_semester">第一学期</string>
+    <string name="total_lessons">已通过科目:</string>
+    <string name="total_credit">总学分数:</string>
+    <string name="minutes_later">%d分钟后</string>
+    <string name="seconds_later">即将开始</string>
+    <string name="navigation_drawer_open">打开导航菜单</string>
+    <string name="navigation_drawer_close">关闭导航菜单</string>
+    <string name="error_invalid_email">邮件地址错误</string>
+    <string name="error_invalid_password">密码长度过短</string>
+    <string name="error_field_required">该项必填</string>
+    <string name="permission_rationale">需要联系人权限</string>
+    <string name="title_activity_view_course_details">查看课程信息</string>
+    <string name="title_activity_scrolling">滚动活动</string>
+    <string name="menu_dashboard">概览</string>
+    <string name="msg_welcome">你好, %s.感谢使用中山大学第三方教务系统（Android版）！在此之前，我们需要一些信息以便继续。</string>
+    <string name="err_sync_school_calendar">抱歉，本程序无法通过远程服务器取得该学期校历，你可以尝试选择另一个学期进行同步，或手工设置该学期的开始日期，程序将会尝试计算校历。</string>
+    <string name="spring_semaster">春季学期</string>
+    <string name="fall_semaster">秋季学期</string>
+    <string name="score">分数</string>
+    <string name="teacher">教师:</string>
+    <string name="grade_point">绩点:</string>
+    <string name="rank">排名:</string>
+    <string name="availability">%d / %d (剩余/总人数)</string>
+    <string name="continue_with_netid">以 %s 身份继续</string>
+    <string name="ok">好的</string>
+    <string name="continue_str">继续</string>
+    <string name="confirmation">确认</string>
+    <string name="week_dayofweek">第%d周, %s</string>
+    <string name="confirm">确认</string>
+    <string name="warning">警告</string>
+    <string name="algrithm_not_accurete">你正在尝试切换GPA算法至4分制，我们不保证该算法计算的准确性。</string>
+    <string name="cancel">取消</string>
+    <string name="select_hint">你真的要退选该课程吗？</string>
+    <string name="delete_hint">你真的要退选该课程吗？</string>
+    <string name="press_to_exit">在按一次返回键退出</string>
+    <string name="title">标题</string>
+    <string name="notes">内容（支持MarkDown）</string>
+    <string name="save">保存</string>
+    <string name="action_title_add_memo">添加备忘录</string>
+    <string name="link_course">关联课程</string>
+    <string name="cancel_selection">删除已选图片</string>
+    <string name="memo_stored">成功保存</string>
+    <string name="memo_title_content_empty">题目或内容为空</string>
+    <string name="take_photo">拍照</string>
+    <string name="choose_photo">选择照片</string>
+    <string name="title_activity_view_memo">查看备忘录</string>
+    <string name="memo_deleted">备忘已删除</string>
+    <string name="undo">撤销</string>
+    <string name="title_activity_settings">设置</string>
+    <string name="pref_header_general">通用</string>
+    <string name="desc_about">第三方教务系统</string>
+
+
+    <string-array name="pref_example_list_titles">
+        <item>Always</item>
+        <item>When possible</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_example_list_values">
+        <item>1</item>
+        <item>0</item>
+        <item>-1</item>
+    </string-array>
+    <string-array name="pref_sync_frequency_titles">
+        <item>15 minutes</item>
+        <item>30 minutes</item>
+        <item>1 hour</item>
+        <item>3 hours</item>
+        <item>6 hours</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_sync_frequency_values">
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+        <item>180</item>
+        <item>360</item>
+        <item>-1</item>
+    </string-array>
+
+    <string-array name="list_preference_entries">
+        <item>Entry 1</item>
+        <item>Entry 2</item>
+        <item>Entry 3</item>
+    </string-array>
+
+    <string-array name="list_preference_entry_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string-array name="multi_select_list_preference_default_value" />
+    <string name="new_version">软件更新</string>
+    <string name="disclaimer">免责声明：本软件为独立于“中山大学”的第三方开发项目，应用内的数据由中山大学相关系统提供，软件开发者不对软件所提供数据承担任何责任。</string>
+</resources>

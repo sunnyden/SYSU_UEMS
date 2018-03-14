@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~  Copyrights (C) Haoqing Deng<admin@denghaoqing.com> All rights reserved
+  ~  This file is part of the project SYSU_UEMS
+  -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".AddMemoActivity">
+    <item
+        android:id="@+id/action_save_memo"
+        android:icon="@drawable/ic_save_black_24dp"
+        android:title="@string/save"
+        app:showAsAction="ifRoom">
+
+    </item>
+</menu>

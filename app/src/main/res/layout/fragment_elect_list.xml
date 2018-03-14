@@ -1,0 +1,71 @@
+<!--
+  ~  Copyrights (C) Haoqing Deng<admin@denghaoqing.com> All rights reserved
+  ~  This file is part of the project SYSU_UEMS
+  -->
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context="com.denghaoqing.sysu.Fragments.ElectListFragment">
+
+        <!-- TODO: Update blank fragment layout -->
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:text="Selected Course"
+            android:textSize="20sp" />
+
+        <View
+            android:layout_width="150dp"
+            android:layout_height="5dp"
+            android:layout_below="@+id/textView9"
+            android:layout_centerHorizontal="true"
+            android:background="@color/event_color_01" />
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/selCourseList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView9"
+            android:layout_marginTop="10dp">
+
+        </android.support.v7.widget.RecyclerView>
+
+        <TextView
+            android:id="@+id/availcoursetxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/selCourseList"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:text="Available Course"
+            android:textSize="20sp" />
+
+        <View
+            android:layout_width="150dp"
+            android:layout_height="5dp"
+            android:layout_below="@+id/availcoursetxt"
+            android:layout_centerHorizontal="true"
+            android:background="@color/event_color_03" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/availCourseList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/availcoursetxt"
+            android:layout_marginTop="10dp">
+
+        </android.support.v7.widget.RecyclerView>
+    </RelativeLayout>
+
+</android.support.v4.widget.NestedScrollView>

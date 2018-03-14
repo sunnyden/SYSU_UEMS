@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~  Copyrights (C) Haoqing Deng<admin@denghaoqing.com> All rights reserved
+  ~  This file is part of the project SYSU_UEMS
+  -->
+
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <!--Schedule-->
+    <color name="event_color_01">#59dbe0</color>
+    <color name="event_color_02">#f57f68</color>
+    <color name="event_color_03">#87d288</color>
+    <color name="event_color_04">#f8b552</color>
+    <color name="toolbar">#efefef</color>
+    <color name="toolbar_text">#8f000000</color>
+    <color name="accent">#2789e4</color>
+
+    <color name="default_text_color">#7e7e7e</color>
+
+    <color name="fab_collapse">#E91E63</color>
+    <color name="fab_expand">#FFFFFF</color>
+
+</resources>

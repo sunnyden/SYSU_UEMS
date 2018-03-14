@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~  Copyrights (C) Haoqing Deng<admin@denghaoqing.com> All rights reserved
+  ~  This file is part of the project SYSU_UEMS
+  -->
+
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/item_card_memo"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    android:layout_marginEnd="10dp"
+    android:layout_marginStart="10dp"
+    android:layout_marginTop="5dp"
+    android:elevation="6dp"
+    app:cardCornerRadius="6dp"
+    app:cardPreventCornerOverlap="false"
+    app:cardUseCompatPadding="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="15dp">
+
+        <ImageView
+            android:id="@+id/memo_preview_img"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/memo_preview_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/memo_preview_img"
+            android:layout_marginTop="10dp"
+            android:paddingEnd="15dp"
+            android:paddingStart="15dp"
+            android:text="Test Test"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/memo_preview_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/memo_preview_title"
+            android:layout_marginTop="3dp"
+            android:maxLines="3"
+            android:minLines="1"
+            android:paddingEnd="15dp"
+            android:paddingStart="15dp"
+            android:text="ajflajlksdjoqieopqireqorqr" />
+
+        <RelativeLayout
+            android:id="@+id/layout_preview_memo_refCourse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/memo_preview_content"
+            android:layout_marginTop="6dp"
+            android:paddingEnd="15dp"
+            android:paddingStart="15dp">
+
+            <ImageView
+                android:id="@+id/ic_memo_preview_link"
+                android:layout_width="19dp"
+                android:layout_height="19dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_link_black_24dp"
+                android:tint="@color/toolbar_text" />
+
+            <TextView
+                android:id="@+id/memo_preview_ref_course"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/ic_memo_preview_link"
+                android:gravity="center_vertical"
+                android:paddingStart="6dp"
+                android:text="afjkajfqjeorqeor" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/layout_preview_memo_addtime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layout_preview_memo_refCourse"
+            android:layout_marginTop="6dp"
+            android:paddingEnd="15dp"
+            android:paddingStart="15dp">
+
+            <ImageView
+                android:id="@+id/ic_memo_preview_clock"
+                android:layout_width="19dp"
+                android:layout_height="19dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_schedule_black_24dp"
+                android:tint="@color/toolbar_text" />
+
+            <TextView
+                android:id="@+id/memo_preview_add_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/ic_memo_preview_clock"
+                android:gravity="center_vertical"
+                android:paddingStart="6dp"
+                android:text="afjkajfqjeorqeor" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+</android.support.v7.widget.CardView>

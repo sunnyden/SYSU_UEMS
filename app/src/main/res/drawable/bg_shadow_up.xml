@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~  Copyrights (C) Haoqing Deng<admin@denghaoqing.com> All rights reserved
+  ~  This file is part of the project SYSU_UEMS
+  -->
+
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item>
+        <shape>
+            <gradient
+                android:angle="90"
+                android:endColor="#fafafa"
+                android:startColor="#AAAAAA" />
+        </shape>
+    </item>
+
+
+    <item android:top="8dp">
+        <shape>
+            <solid android:color="@android:color/background_light" />
+        </shape>
+    </item>
+
+</layer-list>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~  Copyrights (C) Haoqing Deng<admin@denghaoqing.com> All rights reserved
+  ~  This file is part of the project SYSU_UEMS
+  -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_login"
+            android:icon="@drawable/ic_menu_login_24dp"
+            android:title="@string/menu_login" />
+        <item
+            android:id="@+id/nav_dashboard"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="@string/menu_dashboard" />
+    </group>
+    <item
+        android:id="@+id/menu_uems_entry"
+        android:title="@string/menu_uems">
+        <menu>
+            <group android:checkableBehavior="single">
+
+                <item
+                    android:id="@+id/nav_schedule"
+                    android:icon="@drawable/ic_date_range_black_24dp"
+                    android:title="@string/menu_schedule" />
+                <item
+                    android:id="@+id/nav_achievement"
+                    android:icon="@drawable/ic_assessment_black_24dp"
+                    android:title="@string/menu_achievement" />
+                <item
+                    android:id="@+id/nav_select"
+                    android:icon="@drawable/ic_select_black_24dp"
+                    android:title="@string/menu_select"
+                    android:visible="true" />
+                <item
+                    android:id="@+id/nav_curriculum"
+                    android:icon="@drawable/ic_school_black_24dp"
+                    android:title="@string/menu_curriculum" />
+                <item
+                    android:id="@+id/nav_library"
+                    android:icon="@drawable/ic_storage_black_24dp"
+                    android:title="@string/menu_lesson" />
+            </group>
+        </menu>
+    </item>
+
+
+    <item
+        android:id="@+id/menu_action_entry"
+        android:title="@string/menu_actions">
+        <menu>
+            <item
+                android:id="@+id/nav_sync"
+                android:icon="@drawable/ic_sync_black_24dp"
+                android:title="@string/menu_sync" />
+            <item
+                android:id="@+id/nav_settings"
+                android:icon="@drawable/ic_settings_black_24dp"
+                android:title="@string/menu_settings" />
+            <item
+                android:id="@+id/nav_feedback"
+                android:icon="@drawable/ic_feedback_black_24dp"
+                android:title="@string/menu_feedback" />
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/ic_exit_to_app_black_24dp"
+                android:title="@string/menu_logout" />
+        </menu>
+    </item>
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/menu_curriculum" />
+
+</menu>

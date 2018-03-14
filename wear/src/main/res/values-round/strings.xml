@@ -1,0 +1,8 @@
+<!--
+  ~  Copyrights (C) Haoqing Deng<admin@denghaoqing.com> All rights reserved
+  ~  This file is part of the project SYSU_UEMS
+  -->
+
+<resources>
+    <string name="hello_world">Hello Round World!</string>
+</resources>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~  Copyrights (C) Haoqing Deng<admin@denghaoqing.com> All rights reserved
+  ~  This file is part of the project SYSU_UEMS
+  -->
+
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_date_range_black_24dp"
+        android:shortcutId="schedule"
+        android:shortcutShortLabel="@string/menu_schedule">
+        <intent
+            android:action="com.denghaoqing.sysu.SCHEDULE"
+            android:targetClass="com.denghaoqing.sysu.MainActivity"
+            android:targetPackage="com.denghaoqing.sysu" />
+        <categories android:name="android.shortcut.category" />
+    </shortcut>
+</shortcuts>

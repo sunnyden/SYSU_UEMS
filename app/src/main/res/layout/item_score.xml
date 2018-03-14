@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~  Copyrights (C) Haoqing Deng<admin@denghaoqing.com> All rights reserved
+  ~  This file is part of the project SYSU_UEMS
+  -->
+
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardItem"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:animateLayoutChanges="true"
+    app:cardCornerRadius="5dp"
+    app:cardElevation="5dp">
+
+    <RelativeLayout
+        android:id="@+id/score_brief"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:visibility="visible">
+
+        <TextView
+            android:id="@+id/course_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="13dp"
+            android:background="@android:color/holo_blue_dark"
+            android:padding="2dp"
+            android:text="公选"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/corsename_brief"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_toEndOf="@+id/course_type"
+            android:layout_toStartOf="@+id/score"
+            android:text="毛泽东思想与中国特色社会主义理论体系概论"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="10dp"
+            android:text="96分"
+            android:textColor="#006600" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/score_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/courseNameBig"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:text="TEST TEST TEST"
+            android:textColor="@android:color/black"
+            android:textStyle="bold" />
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/courseNameBig"
+            android:layout_below="@+id/courseNameBig"
+            android:layout_marginTop="10dp"
+            app:cardBackgroundColor="@android:color/holo_blue_light"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="2dp"
+            app:cardPreventCornerOverlap="false">
+
+            <RelativeLayout
+                android:layout_width="120dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/textViewScore"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center|center_horizontal|center_vertical"
+                    android:lineSpacingExtra="0dp"
+                    android:lineSpacingMultiplier="0"
+                    android:paddingEnd="10dp"
+                    android:paddingStart="10dp"
+                    android:text="90.5"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/white"
+                    android:textSize="50dp" />
+
+                <TextView
+                    android:id="@+id/textView15"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:background="@android:color/holo_blue_dark"
+                    android:gravity="center"
+                    android:text="@string/score"
+                    android:textColor="@android:color/white"
+                    android:textSize="10sp" />
+
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/cardView"
+            android:layout_marginStart="7dp"
+            android:layout_toEndOf="@+id/cardView"
+            android:text="@string/teacher" />
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/textView11"
+            android:layout_below="@+id/total_credit"
+            android:layout_marginTop="4dp"
+            android:text="@string/grade_point" />
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/textView12"
+            android:layout_below="@+id/textView12"
+            android:layout_marginTop="4dp"
+            android:text="@string/rank" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/cardView"
+            android:layout_below="@+id/cardView"
+            android:layout_marginTop="11dp"
+            app:srcCompat="@drawable/ic_schedule_black_24dp" />
+
+        <TextView
+            android:id="@+id/test_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/imageView"
+            android:layout_alignTop="@id/imageView"
+            android:layout_marginStart="2dp"
+            android:layout_toEndOf="@+id/imageView"
+            android:text="@string/time_semester"
+            android:textSize="18sp"
+            android:textStyle="italic" />
+
+        <TextView
+            android:id="@+id/total_credit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/textView11"
+            android:layout_marginStart="9dp"
+            android:layout_toEndOf="@+id/textView11"
+            android:text="习近平" />
+
+        <TextView
+            android:id="@+id/rank"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/textView13"
+            android:layout_alignStart="@+id/total_credit"
+            android:text="4/120" />
+
+        <TextView
+            android:id="@+id/lesson_passed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/textView12"
+            android:layout_alignBottom="@+id/textView12"
+            android:layout_alignStart="@+id/rank"
+            android:text="4.5" />
+
+        <TextView
+            android:id="@+id/credits"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/lesson_passed"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@+id/lesson_passed"
+            android:background="@color/event_color_02"
+            android:paddingEnd="5dp"
+            android:paddingStart="5dp"
+            android:text="@string/credits"
+            android:textColor="@android:color/white" />
+    </RelativeLayout>
+
+
+</android.support.v7.widget.CardView>
