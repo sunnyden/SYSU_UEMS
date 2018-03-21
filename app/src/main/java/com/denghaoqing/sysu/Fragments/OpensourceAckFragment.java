@@ -45,7 +45,12 @@ public class OpensourceAckFragment extends Fragment {
             "**Markwon**  \n" +
             "Copyright 2017 Dimitry Ivanov  \n" +
             "License: Apache 2.0  \n" +
-            "Website: [github.com/noties/Markwon/](https://github.com/noties/Markwon/)";
+            "Website: [github.com/noties/Markwon/](https://github.com/noties/Markwon/)  \n" +
+            "**MPAndroidChart**  \n" +
+            "\n" +
+            "Copyright 2018 Philipp Jahoda  \n" +
+            "License: Apache 2.0  \n" +
+            "Website: [github.com/PhilJay/MPAndroidChart](https://github.com/PhilJay/MPAndroidChart)";
 
     public OpensourceAckFragment() {
         // Required empty public constructor

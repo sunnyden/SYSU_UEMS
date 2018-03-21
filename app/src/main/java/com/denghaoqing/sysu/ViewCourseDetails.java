@@ -5,8 +5,15 @@
 
 package com.denghaoqing.sysu;
 
+import android.content.ContentResolver;
+import android.content.ContentUris;
+import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -28,6 +35,7 @@ import com.denghaoqing.sysu.Schedule.GeneralSchedule;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.TimeZone;
 
 public class ViewCourseDetails extends AppCompatActivity {
     private NestedScrollView baseLayout;
@@ -55,20 +63,32 @@ public class ViewCourseDetails extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
         //baseLayout = (NestedScrollView)findViewById(R.id.course_detail_view);
         //baseLayout.setOnTouchListener(this);
         //baseLayoutDefaultY = baseLayout.getY();
         courseIntent = getIntent();
         beginTime = (Calendar) courseIntent.getSerializableExtra("startTime");
         endTime = (Calendar) courseIntent.getSerializableExtra("endTime");
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final long eventId = addCalendarAccount(ViewCourseDetails.this);
+                Snackbar.make(view, R.string.event_added, Snackbar.LENGTH_LONG)
+                        .setAction(R.string.undo, new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                ContentResolver cr = getContentResolver();
+                                ContentValues values = new ContentValues();
+                                Uri deleteUri = null;
+                                deleteUri = ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, eventId);
+                                int rows = getContentResolver().delete(deleteUri, null, null);
+
+                            }
+                        }).show();
+            }
+        });
         rawEvent = courseIntent.getStringExtra("courseInfo");
         String[] parasedEvent = rawEvent.split("\n");
         courseName = parasedEvent[0];
@@ -182,5 +202,86 @@ public class ViewCourseDetails extends AppCompatActivity {
             default:
                 return null;
         }
+    }
+
+    private long addCalendarAccount(Context context) {
+        long calID = getCalendarId(context);
+        long startMillis = 0;
+        long endMillis = 0;
+        startMillis = beginTime.getTimeInMillis();
+        endMillis = endTime.getTimeInMillis();
+
+        ContentResolver cr = getContentResolver();
+        ContentValues values = new ContentValues();
+        values.put(CalendarContract.Events.DTSTART, startMillis);
+        values.put(CalendarContract.Events.DTEND, endMillis);
+        values.put(CalendarContract.Events.TITLE, courseName);
+        values.put(CalendarContract.Events.DESCRIPTION, teacher);
+        values.put(CalendarContract.Events.EVENT_LOCATION, classroom);
+        values.put(CalendarContract.Events.CALENDAR_ID, calID);
+        values.put(CalendarContract.Events.EVENT_TIMEZONE, TimeZone.getDefault().getID());
+        try {
+            Uri uri = cr.insert(CalendarContract.Events.CONTENT_URI, values);
+            long eventID = Long.parseLong(uri.getLastPathSegment());
+
+            ContentValues remindValues = new ContentValues();
+            remindValues.put(CalendarContract.Reminders.MINUTES, 30);
+            remindValues.put(CalendarContract.Reminders.EVENT_ID, eventID);
+            remindValues.put(CalendarContract.Reminders.METHOD, CalendarContract.Reminders.METHOD_ALERT);
+            cr.insert(CalendarContract.Reminders.CONTENT_URI, remindValues);
+
+            return eventID;
+        } catch (SecurityException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    private int getCalendarId(Context context) {
+        try {
+            Cursor cursor = null;
+            ContentResolver contentResolver = context.getContentResolver();
+            Uri calendars = CalendarContract.Calendars.CONTENT_URI;
+
+            String[] EVENT_PROJECTION = new String[]{
+                    CalendarContract.Calendars._ID,                           // 0
+                    CalendarContract.Calendars.ACCOUNT_NAME,                  // 1
+                    CalendarContract.Calendars.CALENDAR_DISPLAY_NAME,         // 2
+                    CalendarContract.Calendars.OWNER_ACCOUNT,                 // 3
+                    CalendarContract.Calendars.IS_PRIMARY                     // 4
+            };
+
+            int PROJECTION_ID_INDEX = 0;
+            int PROJECTION_ACCOUNT_NAME_INDEX = 1;
+            int PROJECTION_DISPLAY_NAME_INDEX = 2;
+            int PROJECTION_OWNER_ACCOUNT_INDEX = 3;
+            int PROJECTION_VISIBLE = 4;
+
+            cursor = contentResolver.query(calendars, EVENT_PROJECTION, null, null, null);
+
+            if (cursor.moveToFirst()) {
+                String calName;
+                long calId = 0;
+                String visible;
+
+                do {
+                    calName = cursor.getString(PROJECTION_DISPLAY_NAME_INDEX);
+                    calId = cursor.getLong(PROJECTION_ID_INDEX);
+                    visible = cursor.getString(PROJECTION_VISIBLE);
+                    if (visible.equals("1")) {
+                        return (int) calId;
+                    }
+                } while (cursor.moveToNext());
+
+                return (int) calId;
+            }
+            if (!cursor.isClosed()) {
+                cursor.close();
+            }
+        } catch (SecurityException e) {
+
+        }
+
+        return 1;
     }
 }

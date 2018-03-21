@@ -5,6 +5,7 @@
 
 package com.denghaoqing.sysu.CAS;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -55,7 +56,7 @@ public class CAS {
     private Boolean authSuccess = false;
     private Boolean captchaCorrect = false;
 
-    public CAS(Context context, final ImageView view) {
+    public CAS(final Context context, final ImageView view) {
         try {
             this.context = context;
             storedNetId = context.getSharedPreferences(PREF_KEY_STORE, Context.MODE_PRIVATE).getString("netid", null);
@@ -76,6 +77,16 @@ public class CAS {
                             Document doc = Jsoup.parse(new String(responseBody));
                             //Document doc = Jsoup.connect("https://cas.sysu.edu.cn/cas/login").get();
                             Element element = doc.getElementById("fm1");
+                            if (element == null) {
+                                try {
+                                    if (context instanceof Activity) {
+                                        ((Activity) context).finish();
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                                return;
+                            }
                             Log.e(LOG_TAG, doc.getElementById("fm1").attr("action"));
                         /*
                         Iterator<Element> elementIterator = doc.getElementById("fm1").children().iterator();

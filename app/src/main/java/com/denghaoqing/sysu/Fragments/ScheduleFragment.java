@@ -23,6 +23,7 @@ import android.widget.LinearLayout;
 import com.alamkanak.weekview.MonthLoader;
 import com.alamkanak.weekview.WeekView;
 import com.alamkanak.weekview.WeekViewEvent;
+import com.denghaoqing.sysu.MainActivity;
 import com.denghaoqing.sysu.R;
 import com.denghaoqing.sysu.Schedule.Course;
 import com.denghaoqing.sysu.Schedule.Schedule;
@@ -53,14 +54,8 @@ public class ScheduleFragment extends Fragment implements MonthLoader.MonthChang
         mWeekView.setShowNowLine(true);
         mWeekView.setMonthChangeListener(this);
         mWeekView.setOnEventClickListener(this);
-        Calendar calendar = Calendar.getInstance();
-        //mWeekView.goToDate(calendar);
-        mWeekView.goToToday();
-        //Log.e("hour",String.valueOf(calendar.get(Calendar.HOUR_OF_DAY)));
-        mWeekView.goToHour(calendar.get(Calendar.HOUR_OF_DAY));
-        //mWeekView.goToToday();
-
-
+        mWeekView.setScrollListener(this);
+        gotoToday();
         oneDayFab = view.findViewById(R.id.fabOneDay);
         threeDayFab = view.findViewById(R.id.fabThreeDay);
         fiveDayFab = view.findViewById(R.id.fabFiveDay);
@@ -95,8 +90,32 @@ public class ScheduleFragment extends Fragment implements MonthLoader.MonthChang
                 switchVisibility();
             }
         });
-
+        ((MainActivity) getContext()).getMenu().findItem(R.id.action_back_today).setVisible(true);
         return view;
+    }
+
+    public void gotoToday() {
+        Calendar calendar = Calendar.getInstance();
+        mWeekView.goToToday();
+        mWeekView.goToHour(calendar.get(Calendar.HOUR_OF_DAY));
+    }
+
+    @Override
+    public void onDetach() {
+        ((MainActivity) getContext()).getMenu().findItem(R.id.action_back_today).setVisible(false);
+        super.onDetach();
+    }
+
+    @Override
+    public void onDestroyView() {
+        ((MainActivity) getContext()).getMenu().findItem(R.id.action_back_today).setVisible(false);
+        super.onDestroyView();
+    }
+
+    @Override
+    public void onResume() {
+        ((MainActivity) getContext()).getMenu().findItem(R.id.action_back_today).setVisible(true);
+        super.onResume();
     }
 
     @Override
@@ -232,8 +251,17 @@ public class ScheduleFragment extends Fragment implements MonthLoader.MonthChang
         startActivity(mIntent);
     }
 
+
     @Override
     public void onFirstVisibleDayChanged(Calendar newFirstVisibleDay, Calendar oldFirstVisibleDay) {
+        if (oldFirstVisibleDay == null || newFirstVisibleDay.get(Calendar.WEEK_OF_YEAR) != oldFirstVisibleDay.get(Calendar.WEEK_OF_YEAR)) {
+            try {
+                Schedule schedule = new Schedule(getContext());
+                ((MainActivity) getContext()).setTitle(String.format(getString(R.string.week), schedule.getWeekByDate(newFirstVisibleDay)));
+            } catch (Exception e) {
+                ((MainActivity) getContext()).setTitle(R.string.app_name);
+            }
 
+        }
     }
 }

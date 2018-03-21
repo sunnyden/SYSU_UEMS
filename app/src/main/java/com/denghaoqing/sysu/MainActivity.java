@@ -35,6 +35,7 @@ import com.denghaoqing.sysu.CAS.CASAuthActivity;
 import com.denghaoqing.sysu.Fragments.AchievementFragment;
 import com.denghaoqing.sysu.Fragments.DashboardFragment;
 import com.denghaoqing.sysu.Fragments.ScheduleFragment;
+import com.denghaoqing.sysu.Fragments.TeachPlanFragment;
 import com.denghaoqing.sysu.Handlers.ElectAuthHandler;
 import com.denghaoqing.sysu.UEMS.Elect;
 import com.denghaoqing.sysu.UEMS.ElectType;
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity
     public static MainActivity currentActivity;
     public Elect elect = new Elect(this);
     public ArrayList<ElectType> electTypes;
+    private Menu menu;
     private CircleImageView avator;
     private TextView mName;
     private TextView mDepartment;
@@ -60,6 +62,7 @@ public class MainActivity extends AppCompatActivity
     private MenuItem uemsItem = null, actionItem = null;
     private ProgressBar fragmentProgressBar;
     private ElectAuthHandler electAuthHandler;
+    private ScheduleFragment scheduleFragment = new ScheduleFragment();
     private boolean noticed = false;
 
     @Override
@@ -116,29 +119,20 @@ public class MainActivity extends AppCompatActivity
 
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         DashboardFragment dashboardFragment = new DashboardFragment();
-        fragmentTransaction.replace(R.id.fragment_container, dashboardFragment).addToBackStack("BS");
+        fragmentTransaction.replace(R.id.fragment_container, dashboardFragment);
         fragmentTransaction.commit();
         updateInfo();
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_CALENDAR)
                 != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CALENDAR)
                 != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_CALENDAR},
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_CALENDAR, Manifest.permission.READ_CALENDAR},
                     REQUEST_STORAGE);
         }
 
-        try {
-            Log.e("action", getIntent().getAction());
-            if (getIntent().getAction().equals("com.denghaoqing.sysu.SCHEDULE")) {
-                fragmentTransaction = fragmentManager.beginTransaction();
-                ScheduleFragment scheduleFragment = new ScheduleFragment();
-                fragmentTransaction.replace(R.id.fragment_container, scheduleFragment).addToBackStack("BS");
-                fragmentTransaction.commit();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
     }
 
     @Override
@@ -146,9 +140,10 @@ public class MainActivity extends AppCompatActivity
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_CALENDAR)
                 != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CALENDAR)
                 != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_CALENDAR},
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_CALENDAR, Manifest.permission.READ_CALENDAR},
                     REQUEST_STORAGE);
         }
     }
@@ -167,7 +162,22 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+        this.menu = menu;
+        try {
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            if (getIntent().getAction().equals("com.denghaoqing.sysu.SCHEDULE")) {
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container, scheduleFragment).addToBackStack("BS");
+                fragmentTransaction.commit();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return true;
+    }
+
+    public Menu getMenu() {
+        return menu;
     }
 
     @Override
@@ -180,6 +190,11 @@ public class MainActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        } else if (id == R.id.action_back_today) {
+            try {
+                scheduleFragment.gotoToday();
+            } catch (Exception e) {
+            }
         }
 
         return super.onOptionsItemSelected(item);
@@ -222,10 +237,12 @@ public class MainActivity extends AppCompatActivity
             fragmentTransaction.replace(R.id.fragment_container, achievementFragment).addToBackStack("BS");
             fragmentTransaction.commit();
         } else if (id == R.id.nav_curriculum) {
-
+            TeachPlanFragment teachPlanFragment = new TeachPlanFragment();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, teachPlanFragment).addToBackStack("BS");
+            fragmentTransaction.commit();
         } else if (id == R.id.nav_schedule) {
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            ScheduleFragment scheduleFragment = new ScheduleFragment();
             fragmentTransaction.replace(R.id.fragment_container, scheduleFragment).addToBackStack("BS");
             fragmentTransaction.commit();
         } else if (id == R.id.nav_library) {
