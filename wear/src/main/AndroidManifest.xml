@@ -17,7 +17,6 @@
   ~  along with SYSU UEMS; see the file COPYING. If not, see
   ~  <http://www.gnu.org/licenses/>.
   -->
-
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.denghaoqing.sysu">
 
@@ -51,6 +50,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service
+            android:name=".DataSyncService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>

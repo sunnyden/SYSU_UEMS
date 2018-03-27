@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~  Copyright (C) 2013 - 2018, Haoqing Deng <dhq.sunny@gmail.com>
+  ~
+  ~  This file is part of the SYSU UEMS.
+  ~
+  ~  SYSU UEMS is free software; you can redistribute it and/or modify
+  ~  it under the terms of the GNU General Public License as published by
+  ~  the Free Software Foundation; either version 3 of the License, or
+  ~  (at your option) any later version.
+  ~
+  ~  SYSU UEMS is distributed in the hope that it will be useful,
+  ~  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  ~  GNU General Public License for more details.
+  ~
+  ~  You should have received a copy of the GNU General Public License
+  ~  along with SYSU UEMS; see the file COPYING. If not, see
+  ~  <http://www.gnu.org/licenses/>.
+  -->
+
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:layout_marginTop="5dp"
+    android:paddingLeft="3dp"
+    android:paddingRight="3dp"
+    app:cardCornerRadius="5dp"
+    app:cardElevation="20dp"
+    app:cardPreventCornerOverlap="false">
+
+    <RelativeLayout
+        android:id="@+id/course_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/event_color_03"
+        android:padding="3dp">
+
+        <TextView
+            android:id="@+id/course_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="毛泽东思想与中国特色社会主义理论体系概论"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/ic_location"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_alignStart="@id/course_name"
+            android:layout_below="@id/course_name"
+            android:layout_marginTop="2dp"
+            android:src="@drawable/ic_location_on_black_24dp"
+            android:tint="@color/white" />
+
+        <TextView
+            android:id="@+id/classroom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/course_name"
+            android:layout_marginStart="2dp"
+            android:layout_toEndOf="@id/ic_location"
+            android:text="这是一个完全是用来测试的长文字" />
+
+        <ImageView
+            android:id="@+id/ic_person"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_alignStart="@id/course_name"
+            android:layout_below="@id/classroom"
+            android:layout_marginTop="2dp"
+            android:src="@drawable/ic_person_black_24dp"
+            android:tint="@color/white" />
+
+        <TextView
+            android:id="@+id/teacher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/classroom"
+            android:layout_marginStart="2dp"
+            android:layout_toEndOf="@id/ic_person"
+            android:text="这是一个完全是用来测试的长文字" />
+
+        <ImageView
+            android:id="@+id/ic_schedule"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_alignStart="@id/course_name"
+            android:layout_below="@id/teacher"
+            android:layout_marginTop="2dp"
+            android:src="@drawable/ic_schedule_black_24dp"
+            android:tint="@color/white" />
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/teacher"
+            android:layout_marginStart="2dp"
+            android:layout_toEndOf="@id/ic_schedule"
+            android:text="这是一个完全是用来测试的长文字" />
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

@@ -111,6 +111,16 @@
             android:name=".CoursePlanListActivity"
             android:label="@string/title_activity_course_plan_list"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <service android:name=".Service.WearService">
+            <intent-filter>
+                <!-- listeners receive events that match the action and data filters -->
+                <action android:name="com.google.android.gms.wearable.MESSAGE_RECEIVED" />
+                <data
+                    android:host="*"
+                    android:scheme="wear" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

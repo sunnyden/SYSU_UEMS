@@ -52,6 +52,7 @@ import com.denghaoqing.sysu.Fragments.DashboardFragment;
 import com.denghaoqing.sysu.Fragments.ScheduleFragment;
 import com.denghaoqing.sysu.Fragments.TeachPlanFragment;
 import com.denghaoqing.sysu.Handlers.ElectAuthHandler;
+import com.denghaoqing.sysu.Service.WearService;
 import com.denghaoqing.sysu.UEMS.Elect;
 import com.denghaoqing.sysu.UEMS.ElectType;
 import com.denghaoqing.sysu.UEMS.UEMS;
@@ -112,8 +113,7 @@ public class MainActivity extends AppCompatActivity
         };
 
         electAuthHandler = new ElectAuthHandler(this);
-        //Intent serviceIntent = new Intent(this, AuthKeepAliveService.class);
-        //this.startService(serviceIntent);
+
 
         drawer.addDrawerListener(toggle);
         currentActivity = this;
@@ -189,6 +189,13 @@ public class MainActivity extends AppCompatActivity
             e.printStackTrace();
         }
         return true;
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Intent serviceIntent = new Intent(this, WearService.class);
+        this.startService(serviceIntent);
     }
 
     public Menu getMenu() {
