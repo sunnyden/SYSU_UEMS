@@ -20,72 +20,39 @@
 
 package com.denghaoqing.sysu;
 
-import android.content.Context;
-import android.content.SharedPreferences;
+import android.app.NotificationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.text.format.DateUtils;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.PendingResult;
 import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.common.data.FreezableUtils;
-import com.google.android.gms.wearable.DataApi;
-import com.google.android.gms.wearable.DataEvent;
 import com.google.android.gms.wearable.DataEventBuffer;
+import com.google.android.gms.wearable.DataItemBuffer;
 import com.google.android.gms.wearable.DataMap;
-import com.google.android.gms.wearable.DataMapItem;
-import com.google.android.gms.wearable.PutDataMapRequest;
+import com.google.android.gms.wearable.MessageEvent;
+import com.google.android.gms.wearable.Node;
+import com.google.android.gms.wearable.NodeApi;
 import com.google.android.gms.wearable.PutDataRequest;
 import com.google.android.gms.wearable.Wearable;
 import com.google.android.gms.wearable.WearableListenerService;
 
-import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class DataSyncService extends WearableListenerService
         implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
-    private static boolean requestFlag = false;
-    private final String PATH_DATA = "courseList";
+    private static final String PATH_TODAY_SCHEDULE = "/today-schedule";
+    private static final String PATH_UPCOMING_COURSE = "/upcoming-course";
     private GoogleApiClient mGoogleApiClient;
-    private boolean nodeConnected = false;
-    private Thread syncThread = new Thread(new Runnable() {
-        @Override
-        public void run() {
-            while (true) {
-                SharedPreferences sharedPreferences = getSharedPreferences("course", Context.MODE_PRIVATE);
-                long lastSyncTimeMills = sharedPreferences.getLong("lastSyncTime", -1);
-                if (!DateUtils.isToday(lastSyncTimeMills) && !requestFlag) {
-                    if (mGoogleApiClient.isConnected()) {
-                        requestFlag = true;
-                        PutDataMapRequest putDataMapRequest = PutDataMapRequest.create(PATH_DATA);
-                        putDataMapRequest.getDataMap().putString("data", "request");
-                        PutDataRequest request = putDataMapRequest.asPutDataRequest();
-                        PendingResult<DataApi.DataItemResult> pendingResult =
-                                Wearable.DataApi.putDataItem(mGoogleApiClient, request);
-
-                        pendingResult.setResultCallback(new ResultCallback<DataApi.DataItemResult>() {
-                            @Override
-                            public void onResult(DataApi.DataItemResult dataItemResult) {
-                                Log.e("WEAR APP", "APPLICATION Result has come");
-                            }
-                        });
-                    } else {
-                        mGoogleApiClient.connect();
-                    }
-                }
-                try {
-                    Thread.sleep(10000);
-                } catch (InterruptedException e) {
-                    //
-                }
-            }
-        }
-    });
+    private Timer timer;
 
     public DataSyncService() {
+
     }
 
     @Override
@@ -97,40 +64,147 @@ public class DataSyncService extends WearableListenerService
                 .addOnConnectionFailedListener(this)
                 .build();
         mGoogleApiClient.connect();
+        Log.e("WearService", "engaging");
+        timer = new Timer();
+        Log.e("startservice", "servicestart");
     }
 
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        nodeConnected = false;
+    private void disconnect() {
+        if ((mGoogleApiClient != null) && (mGoogleApiClient.isConnected())) {
+            mGoogleApiClient.disconnect();
+        }
     }
 
-    @Override
-    public void onConnected(@Nullable Bundle bundle) {
-        nodeConnected = true;
+    private void connectWearApi(final Runnable onConnectedAction) {
+
+        if (mGoogleApiClient.isConnected()) {
+            onConnectedAction.run();
+        } else {
+            mGoogleApiClient = new GoogleApiClient.Builder(this)
+                    .addApi(Wearable.API)
+                    .addConnectionCallbacks(new GoogleApiClient.ConnectionCallbacks() {
+                        @Override
+                        public void onConnected(Bundle bundle) {
+                            onConnectedAction.run();
+                        }
+
+                        @Override
+                        public void onConnectionSuspended(int cause) {
+
+                        }
+                    }).build();
+            mGoogleApiClient.connect();
+        }
     }
 
+    private void sendMessage(final String path, final String message) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                // broadcast the message to all connected devices
+                final NodeApi.GetConnectedNodesResult nodes = Wearable.NodeApi.getConnectedNodes(mGoogleApiClient).await();
+                for (Node node : nodes.getNodes()) {
+                    Wearable.MessageApi.sendMessage(mGoogleApiClient, node.getId(), path, message.getBytes()).await();
+
+                }
+            }
+        }).start();
+    }
+
+
     @Override
-    public void onConnectionSuspended(int i) {
-        nodeConnected = false;
+    public void onMessageReceived(MessageEvent messageEvent) {
+        Log.e("WearService", messageEvent.getPath());
+        String path = messageEvent.getPath();
+        String data = new String(messageEvent.getData());
     }
 
     @Override
     public void onDataChanged(DataEventBuffer dataEventBuffer) {
-        final ArrayList<DataEvent> events = FreezableUtils.freezeIterable(dataEventBuffer);
-        for (DataEvent event : events) {
-            PutDataMapRequest putDataMapRequest =
-                    PutDataMapRequest.createFromDataMapItem(DataMapItem.fromDataItem(event.getDataItem()));
-
-            String path = event.getDataItem().getUri().getPath();
-            if (event.getType() == DataEvent.TYPE_CHANGED) {
-                if (PATH_DATA.equals(path)) {
-                    DataMap data = putDataMapRequest.getDataMap();
-                    String info = data.getString("data");
-                } else if (event.getType() == DataEvent.TYPE_DELETED) {
-
-                }
-            }
-        }
-        requestFlag = false;
+        super.onDataChanged(dataEventBuffer);
     }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+        Log.e("failed", connectionResult.getErrorMessage());
+    }
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+        Log.e("conn", "success");
+        timer.scheduleAtFixedRate(new TimerTask() {
+            public void run() {
+                Uri uri = new Uri.Builder()
+                        .scheme(PutDataRequest.WEAR_URI_SCHEME)
+                        .path(PATH_UPCOMING_COURSE)
+                        .build();
+                Wearable.DataApi.getDataItems(mGoogleApiClient, uri)
+                        .setResultCallback(
+                                new ResultCallback<DataItemBuffer>() {
+                                    @Override
+                                    public void onResult(DataItemBuffer dataItems) {
+                                        sendMessage(PATH_UPCOMING_COURSE, "get upcoming course");
+                                        if (dataItems.getCount() == 0) {
+                                            // refresh the list of conferences from Mobile
+                                            sendMessage(PATH_UPCOMING_COURSE, "get upcoming course");
+                                            dataItems.release();
+                                            return;
+                                        }
+
+                                        DataMap dataMap = DataMap.fromByteArray(dataItems.get(0).getData());
+                                        if (dataMap == null) {
+                                            // refresh the list of conferences from Mobile
+                                            sendMessage(PATH_UPCOMING_COURSE, "get upcoming course");
+                                            dataItems.release();
+                                            return;
+                                        }
+
+                                        DataMap courseDM = dataMap.getDataMap("upcoming");
+                                        if (courseDM == null) {
+                                            dataItems.release();
+                                            return;
+                                        }
+                                        if (courseDM.getBoolean("hasCourse")) {
+                                            NotificationCompat.Builder notificationBuilder = null;
+                                            long timeInterval = courseDM.getLong("interval");
+                                            int minutes = (int) (timeInterval / 60000);
+                                            String subText = "";
+                                            if (minutes < 1) {
+                                                subText = getString(R.string.seconds_later);
+                                            } else {
+                                                subText = getString(R.string.minutes_later, minutes);
+                                            }
+
+                                            notificationBuilder = new NotificationCompat.Builder(DataSyncService.this)
+                                                    .setContentTitle(courseDM.getString("course"))
+                                                    .setSmallIcon(R.drawable.ic_notification)
+                                                    .setOngoing(true)
+                                                    .setOnlyAlertOnce(true);
+
+                                            notificationBuilder.setContentText(courseDM.getString("classroom") + "\n" + subText);
+                                            NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                                            notificationManager.notify(5, notificationBuilder.build());
+
+                                        } else {
+                                            try {
+                                                NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                                                notificationManager.cancel(5);
+                                            } catch (Exception e) {
+                                            }
+                                        }
+                                        dataItems.release();
+
+                                    }
+                                }
+                        );
+                Log.e("timetick", "tick");
+            }
+        }, 0, 60000);
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
 }

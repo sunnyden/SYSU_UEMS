@@ -28,4 +28,6 @@
     <string name="spring_semaster">Spring Semaster</string>
     <string name="fall_semaster">Fall Semaster</string>
     <string name="section">Sect. %d to %d</string>
+    <string name="minutes_later">%d minutes later</string>
+    <string name="seconds_later">Seconds later</string>
 </resources>

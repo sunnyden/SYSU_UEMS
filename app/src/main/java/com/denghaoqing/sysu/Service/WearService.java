@@ -26,6 +26,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.denghaoqing.sysu.Schedule.Course;
+import com.denghaoqing.sysu.Schedule.GeneralSchedule;
 import com.denghaoqing.sysu.Schedule.Schedule;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.wearable.DataApi;
@@ -44,6 +45,7 @@ import java.util.List;
 
 public class WearService extends WearableListenerService {
     private static final String PATH_TODAY_SCHEDULE = "/today-schedule";
+    private static final String PATH_UPCOMING_COURSE = "/upcoming-course";
     private GoogleApiClient mGoogleApiClient;
 
     public WearService() {
@@ -136,7 +138,27 @@ public class WearService extends WearableListenerService {
         String data = new String(messageEvent.getData());
         if (path.equalsIgnoreCase(PATH_TODAY_SCHEDULE)) {
             retrieveTodaySchedule();
+        } else if (path.equalsIgnoreCase(PATH_UPCOMING_COURSE)) {
+            retrieveUpcomingCourse();
         }
+    }
+
+    private void retrieveUpcomingCourse() {
+        final PutDataMapRequest putDataMapRequest = PutDataMapRequest.create(PATH_UPCOMING_COURSE);
+        Schedule schedule = new Schedule(this);
+        Course course = schedule.getUpComingCourse();
+        final DataMap dataMap = new DataMap();
+        if (course != null) {
+            dataMap.putString("course", course.courseName);
+            dataMap.putString("classroom", course.classroom);
+            long timeInterval = GeneralSchedule.getTimeInterval(Calendar.getInstance(), course.section);
+            dataMap.putLong("interval", timeInterval);
+            dataMap.putBoolean("hasCourse", true);
+        } else {
+            dataMap.putBoolean("hasCourse", false);
+        }
+        putDataMapRequest.getDataMap().putDataMap("upcoming", dataMap);
+        sendMessage(putDataMapRequest);
     }
 
     private void retrieveTodaySchedule() {

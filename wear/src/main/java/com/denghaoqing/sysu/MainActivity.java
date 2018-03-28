@@ -62,7 +62,8 @@ public class MainActivity extends WearableActivity implements GoogleApiClient.Co
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        //Intent mIntent = new Intent(this,DataSyncService.class);
+        //startService(mIntent);
         WearableRecyclerView recyclerView = findViewById(R.id.recyc_view);
         recyclerView.setEdgeItemsCenteringEnabled(true);
         CustomScrollingLayoutCallback customScrollingLayoutCallback =
