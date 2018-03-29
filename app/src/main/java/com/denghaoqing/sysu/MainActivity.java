@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private static final int REQUEST_STORAGE = 0;
     public static MainActivity currentActivity;
+    public static int LOGIN_REQUEST_CODE = 1;
     public Elect elect = new Elect(this);
     public ArrayList<ElectType> electTypes;
     private Menu menu;
@@ -95,6 +96,7 @@ public class MainActivity extends AppCompatActivity
 
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         CAS.updateLoginState(this);
+        CAS mCAS = new CAS(this);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
@@ -130,7 +132,10 @@ public class MainActivity extends AppCompatActivity
 
         uemsItem = navigationView.getMenu().findItem(R.id.menu_uems_entry);
         actionItem = navigationView.getMenu().findItem(R.id.menu_action_entry);
-
+        MenuItem loginItem = navigationView.getMenu().findItem(R.id.nav_login);
+        if (CAS.LOGIN) {
+            loginItem.setVisible(false);
+        }
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         DashboardFragment dashboardFragment = new DashboardFragment();
         fragmentTransaction.replace(R.id.fragment_container, dashboardFragment);
@@ -248,7 +253,7 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_login) {
             Intent mIntent = new Intent(MainActivity.this, CASAuthActivity.class);
-            startActivity(mIntent);
+            startActivityForResult(mIntent, LOGIN_REQUEST_CODE);
         } else if (id == R.id.nav_achievement) {
 
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -302,6 +307,13 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == LOGIN_REQUEST_CODE) {
+            if (data.getBooleanExtra("login", false)) {
+                Intent mIntent = new Intent(this, DataFetchUI.class);
+                startActivity(mIntent);
+            }
+        }
+
     }
 
 

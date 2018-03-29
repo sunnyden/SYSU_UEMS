@@ -50,6 +50,7 @@ import com.denghaoqing.sysu.Schedule.Schedule;
 import com.denghaoqing.sysu.Schedule.SchoolCalendarHelper;
 import com.denghaoqing.sysu.Schedule.Semaster;
 import com.denghaoqing.sysu.UEMS.UEMS;
+import com.denghaoqing.sysu.Utils.TaskScheduler;
 
 import java.util.Calendar;
 
@@ -66,6 +67,7 @@ public class DataFetchUI extends AppCompatActivity implements AdapterView.OnItem
     private boolean haveCalendar = false;
 
     private ProgressBar captAuthProg = null;
+    private ProgressBar fetchProgressBar = null;
     private ImageView captchaView;
     private EditText captchaInput;
     private CAS mCAS;
@@ -73,6 +75,7 @@ public class DataFetchUI extends AppCompatActivity implements AdapterView.OnItem
     private AlertDialog dialogCaptcha = null;
     //private final WeakReference<DataFetchUI> loginActivityWeakRef;
     private Handler loginHandler;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,30 +101,8 @@ public class DataFetchUI extends AppCompatActivity implements AdapterView.OnItem
         laySubmit = findViewById(R.id.rlay_touch_sync);
         laySubmit.setVisibility(View.INVISIBLE);
         progressBar = findViewById(R.id.chk_progress);
-        laySubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Schedule schedule = new Schedule(getApplicationContext());
-                if (haveCalendar) {
-                    schedule.fetchSemasterSchedule(selSemaster.toString());
-                } else {
-                    Calendar calendar = Calendar.getInstance();
-                    calendar.set(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth());
-                    schedule.manualSetCalender(selSemaster.toString(), calendar);
-                }
-                ProfessionListHelper professionListHelper = new ProfessionListHelper(DataFetchUI.this);
-                professionListHelper.fetchList();
+        fetchProgressBar = findViewById(R.id.dataFetchProgress);
 
-
-                UEMS uems = new UEMS(DataFetchUI.this);
-                uems.getBasicStudentInfo();
-
-                Achievement achievement = new Achievement(DataFetchUI.this);
-                achievement.pullScoreFromServer();
-                //finish();
-
-            }
-        });
         final Handler handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
@@ -181,9 +162,46 @@ public class DataFetchUI extends AppCompatActivity implements AdapterView.OnItem
                         dialogCaptcha = builder.create();
                         dialogCaptcha.show();
                     }
+                } else {
+                    finish();
                 }
             }
         };
+        laySubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Schedule schedule = new Schedule(getApplicationContext());
+                fetchProgressBar.setVisibility(View.VISIBLE);
+                if (haveCalendar) {
+                    schedule.fetchSemasterSchedule(selSemaster.toString());
+                } else {
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.set(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth());
+                    schedule.manualSetCalender(selSemaster.toString(), calendar);
+                }
+                ProfessionListHelper professionListHelper = new ProfessionListHelper(DataFetchUI.this);
+                professionListHelper.fetchList();
+
+
+                UEMS uems = new UEMS(DataFetchUI.this);
+                uems.getBasicStudentInfo();
+
+                Achievement achievement = new Achievement(DataFetchUI.this);
+                achievement.pullScoreFromServer();
+                //finish();
+                laySubmit.setEnabled(false);
+                laySubmit.setVisibility(View.GONE);
+                laySubmit.setOnClickListener(null);
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        while (TaskScheduler.runningThreads > 0) ;
+                        handler.sendEmptyMessage(2);
+                    }
+                }).start();
+
+            }
+        });
         new Thread(new Runnable() {
             @Override
             public void run() {

@@ -21,6 +21,7 @@
 package com.denghaoqing.sysu.CAS;
 
 import android.app.Activity;
+import android.app.Service;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -32,7 +33,6 @@ import com.denghaoqing.sysu.Cookie.CookieHelper;
 import com.denghaoqing.sysu.UEMS.UEMS;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.BinaryHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.SyncHttpClient;
@@ -94,8 +94,12 @@ public class CAS {
                             Element element = doc.getElementById("fm1");
                             if (element == null) {
                                 try {
-                                    if (context instanceof Activity) {
+                                    UEMS.UEMS_LOGIN_STATE = true;
+                                    if (context instanceof CASAuthActivity) {
+                                        //Only work for the CASAuth activity.
                                         ((Activity) context).finish();
+                                    } else if (context instanceof Service) {
+                                        //actions to do if the request obj is server, should update the uems login state
                                     }
                                 } catch (Exception e) {
                                     e.printStackTrace();
@@ -103,14 +107,6 @@ public class CAS {
                                 return;
                             }
                             Log.e(LOG_TAG, doc.getElementById("fm1").attr("action"));
-                        /*
-                        Iterator<Element> elementIterator = doc.getElementById("fm1").children().iterator();
-                        while (elementIterator.hasNext()){
-                            Iterator<Element> subElementIterator = elementIterator.next().children().iterator();
-                            while (element.)
-                            Log.e(LOG_TAG,elementIterator.next().html());
-
-                        }*/
                             Iterator<Element> elementIterator = element.children().select(".row.btn-row")
                                     .get(0).select("input").iterator();
                             while (elementIterator.hasNext()) {
@@ -156,9 +152,13 @@ public class CAS {
         }
     }
 
-    public CAS(Context context) {
+    public CAS(final Context context) {
+
         try {
             this.context = context;
+            storedNetId = context.getSharedPreferences(PREF_KEY_STORE, Context.MODE_PRIVATE).getString("netid", null);
+            storedPasswd = context.getSharedPreferences(PREF_KEY_STORE, Context.MODE_PRIVATE).getString("password", null);
+            LOGIN = (storedNetId != null && storedPasswd != null);
             URL authUrl = new URL(CAS_URL);
             final AsyncHttpClient client = new AsyncHttpClient();
             CookieHelper cookieHelper = new CookieHelper(context);
@@ -166,7 +166,7 @@ public class CAS {
             client.addHeader("User-Agent", USER_AGENT);
             RequestParams requestParams = new RequestParams();
             requestParams.add(SERVICE_AUTH_KEY, SERVICE_AUTH_CALLBACK);
-            client.get(CAS_URL, new AsyncHttpResponseHandler() {
+            client.get(CAS_URL, requestParams, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                     if (statusCode == 200) {
@@ -174,15 +174,21 @@ public class CAS {
                             Document doc = Jsoup.parse(new String(responseBody));
                             //Document doc = Jsoup.connect("https://cas.sysu.edu.cn/cas/login").get();
                             Element element = doc.getElementById("fm1");
+                            if (element == null) {
+                                try {
+                                    UEMS.UEMS_LOGIN_STATE = true;
+                                    if (context instanceof CASAuthActivity) {
+                                        //Only work for the CASAuth activity.
+                                        ((Activity) context).finish();
+                                    } else if (context instanceof Service) {
+                                        //actions to do if the request obj is server, should update the uems login state
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                                return;
+                            }
                             Log.e(LOG_TAG, doc.getElementById("fm1").attr("action"));
-                        /*
-                        Iterator<Element> elementIterator = doc.getElementById("fm1").children().iterator();
-                        while (elementIterator.hasNext()){
-                            Iterator<Element> subElementIterator = elementIterator.next().children().iterator();
-                            while (element.)
-                            Log.e(LOG_TAG,elementIterator.next().html());
-
-                        }*/
                             Iterator<Element> elementIterator = element.children().select(".row.btn-row")
                                     .get(0).select("input").iterator();
                             while (elementIterator.hasNext()) {
@@ -192,20 +198,6 @@ public class CAS {
                                 Log.e(LOG_TAG, hiddenElement.attr("value"));
                             }
                             //elementIterator = element.select(".row.btn-row").get(0).children().iterator();
-                            client.get(CAPTCHA_URL, new BinaryHttpResponseHandler() {
-                                @Override
-                                public void onSuccess(int statusCode, Header[] headers, byte[] binaryData) {
-                                    if (statusCode == 200) {
-                                        Captcha = BitmapFactory.decodeByteArray(binaryData, 0, binaryData.length);
-                                    }
-                                }
-
-                                @Override
-                                public void onFailure(int statusCode, Header[] headers, byte[] binaryData, Throwable error) {
-
-                                }
-                            });
-
                         } catch (Exception e) {
                             e.printStackTrace();
                         }

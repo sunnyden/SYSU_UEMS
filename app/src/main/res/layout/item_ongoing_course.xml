@@ -53,7 +53,7 @@
             android:layout_alignStart="@+id/txtOnGoing"
             android:layout_below="@+id/txtOnGoing"
             android:layout_marginTop="7dp"
-            android:text="习近平谈修宪复辟"
+            android:text="djlkajflkajlkfda"
             android:textColor="@android:color/black"
             android:textSize="20dp" />
 

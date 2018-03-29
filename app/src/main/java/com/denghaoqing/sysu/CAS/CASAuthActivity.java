@@ -25,6 +25,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
@@ -45,6 +46,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.denghaoqing.sysu.MainActivity;
 import com.denghaoqing.sysu.R;
 
 import java.util.ArrayList;
@@ -312,6 +314,9 @@ public class CASAuthActivity extends AppCompatActivity implements LoaderCallback
             showProgress(false);
 
             if (success) {
+                Intent mIntent = new Intent();
+                mIntent.putExtra("login", true);
+                setResult(MainActivity.LOGIN_REQUEST_CODE, mIntent);
                 finish();
             } else if (mCAS.getCaptchaCorrect()) {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));

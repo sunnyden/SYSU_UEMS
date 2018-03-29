@@ -61,8 +61,6 @@ public class UEMS {
     //For the return, if the operation succeeded, there will be an empty response returned, otherwize, it will return an json with error messages.
     public static final String STUDENT_COURSE_ELECT = "https://uems.sysu.edu.cn/elect/s/elect";//POST,jxbh as course id,xkjdszid for courseType, sid for session id
     public static final String STUDENT_COURSE_UNELECT = "https://uems.sysu.edu.cn/elect/s/unelect";//POST,params is exactly the same as elect
-
-
     /*
     * Fetch list by using GET method.
     * xqm for Campus ID, 1 is South camp, 2 is
@@ -73,6 +71,7 @@ public class UEMS {
     public static final String XQM_NORTH = "2";
     public static final String XQM_ZHUHAI = "3";
     public static final String XQM_EAST = "4";
+    public static boolean UEMS_LOGIN_STATE = false;
     //TODO implement browsing different campus on next term.
     private final String LOG_TAG = "UEMS";
     public boolean initSync = false;
@@ -254,6 +253,7 @@ public class UEMS {
 
             }
         });
+        UEMS_LOGIN_STATE = true;
         return loginState;
     }
 }
