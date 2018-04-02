@@ -80,6 +80,7 @@
     <string name="second_semester">Semester 2</string>
     <string name="third_semester">Semester 3</string>
     <string name="credits">%s Credit</string>
+    <string name="unknown">Unknown</string>
     <string name="gpa">GPA</string>
     <string name="total_lessons">Lessons Passed:</string>
     <string name="total_credit">Total Credits:</string>

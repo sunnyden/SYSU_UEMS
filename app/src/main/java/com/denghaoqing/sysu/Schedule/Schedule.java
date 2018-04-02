@@ -28,6 +28,7 @@ import android.util.Log;
 
 import com.denghaoqing.sysu.Cookie.CookieHelper;
 import com.denghaoqing.sysu.UEMS.UEMS;
+import com.denghaoqing.sysu.Utils.TaskScheduler;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -68,16 +69,17 @@ public class Schedule {
         Cursor cursor = db.rawQuery(querySQL, new String[]{semester, String.valueOf(week)});
         cursor.moveToLast();
         try {
-            if (cursor.getCount() != 0 && cursor.getInt(cursor.getColumnIndex("pulled")) == 0) {
+            if (cursor.getCount() != 0) {// && cursor.getInt(cursor.getColumnIndex("pulled")) == 0
                 if (!cursor.isClosed()) {
                     cursor.close();
                 }
                 final AsyncHttpClient client = new AsyncHttpClient();
                 client.setCookieStore(cookieHelper);
+                TaskScheduler.runningThreads++;
                 client.get(String.format(UEMS.UEMS_SCHEDULE_URL, semester, String.valueOf(week)), new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                        Log.e(LOG_TAG, new String(responseBody));
+                        //Log.e(LOG_TAG, new String(responseBody));
                         try {
                             JSONObject response = new JSONObject(new String(responseBody));
                             if (response.getInt("code") == 200) {
@@ -131,12 +133,22 @@ public class Schedule {
                                             }
 
                                             SQLiteDatabase database = scheduleDataBase.getWritableDatabase();
-                                            database.insert("schedule", null, contentValues);
+                                            String sql = "select * from schedule where ac_year=? and week=? and section=? and time=?";
+                                            Cursor chkCursor = database.rawQuery(sql,
+                                                    new String[]{semester, String.valueOf(week), String.valueOf(section), String.valueOf(time)});
+                                            chkCursor.moveToLast();
+                                            if (chkCursor.getCount() == 0) {
+                                                database.insert("schedule", null, contentValues);
+                                            }
+                                            if (!chkCursor.isClosed()) {
+                                                chkCursor.close();
+                                            }
                                             ContentValues flagValue = new ContentValues();
                                             flagValue.put("pulled", 1);
                                             database.update("schoolcalender", flagValue, "ac_year=? and week=?", new String[]{semester, String.valueOf(week)});
                                             database.close();
-                                            Log.d(LOG_TAG, contentValues.toString());
+                                            //Log.d(LOG_TAG, contentValues.toString());
+                                            //Log.e(LOG_TAG,"hi");
                                         }
                                     }
                                 }
@@ -145,11 +157,12 @@ public class Schedule {
                             //CAS.LOGIN=false;
                             e.printStackTrace();
                         }
-
+                        TaskScheduler.runningThreads--;
                     }
 
                     @Override
                     public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                        TaskScheduler.runningThreads--;
 
                     }
                 });
@@ -203,6 +216,7 @@ public class Schedule {
                 }
                 AsyncHttpClient client = new AsyncHttpClient();
                 client.setCookieStore(cookieHelper);
+                TaskScheduler.runningThreads++;
                 client.get(String.format(UEMS.UEMS_SCHOOL_CALENDER, semester, String.valueOf(week)), new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -226,13 +240,16 @@ public class Schedule {
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
+                        TaskScheduler.runningThreads--;
                     }
 
                     @Override
                     public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-
+                        TaskScheduler.runningThreads--;
                     }
                 });
+            } else {
+                pullScheduleFromServer(semester, week);
             }
         } catch (Exception e) {
             e.printStackTrace();

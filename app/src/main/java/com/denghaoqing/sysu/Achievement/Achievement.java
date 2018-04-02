@@ -29,6 +29,7 @@ import android.util.Log;
 import com.denghaoqing.sysu.Cookie.CookieHelper;
 import com.denghaoqing.sysu.Course.Course;
 import com.denghaoqing.sysu.UEMS.UEMS;
+import com.denghaoqing.sysu.Utils.TaskScheduler;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
@@ -115,6 +116,7 @@ public class Achievement {
         CookieHelper cookieHelper = new CookieHelper(context);
         AsyncHttpClient client = new AsyncHttpClient();
         client.setCookieStore(cookieHelper);
+        TaskScheduler.runningThreads++;
         client.get(UEMS.UEMS_PERSONAL_SCORE, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -165,11 +167,12 @@ public class Achievement {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                TaskScheduler.runningThreads--;
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-
+                TaskScheduler.runningThreads--;
             }
         });
     }

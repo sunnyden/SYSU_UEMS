@@ -21,10 +21,10 @@
 package com.denghaoqing.sysu.Profession;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.denghaoqing.sysu.Cookie.CookieHelper;
 import com.denghaoqing.sysu.UEMS.UEMS;
+import com.denghaoqing.sysu.Utils.TaskScheduler;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -61,6 +61,7 @@ public class ProfessionListHelper {
             jsonObject.put("param", subObj);
             ByteArrayEntity byteArrayEntity = new ByteArrayEntity(jsonObject.toString().getBytes("UTF-8"));
             byteArrayEntity.setContentType(HTTP_CONTENT_TYPE_JSON);
+            TaskScheduler.runningThreads++;
             client.post(context, UEMS.UEMS_SCHOOL_PROFESSION_LIST, byteArrayEntity, HTTP_CONTENT_TYPE_JSON, new JsonHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -70,7 +71,7 @@ public class ProfessionListHelper {
                             JSONArray rows = data.getJSONArray("rows");
                             int i = 0;
                             for (i = 0; i < rows.length(); i++) {
-                                Log.d(LOG_TAG, String.valueOf(i));
+                                //Log.d(LOG_TAG, String.valueOf(i));
                                 JSONObject profession = rows.getJSONObject(i);
                                 Profession professionObj = new Profession(context);
                                 try {
@@ -78,20 +79,25 @@ public class ProfessionListHelper {
                                             profession.getString("id"), profession.getString("name"),
                                             profession.getString("enName"), Integer.parseInt(profession.getString("educationalSystem")),
                                             profession.getInt("maxStudyYear"), profession.has("degreeGrantName") ? profession.getString("degreeGrantName") : "");
-                                    Log.i(LOG_TAG, String.valueOf(res));
+                                    //Log.i(LOG_TAG, String.valueOf(res));
                                 } catch (Exception e) {
-                                    Log.e(LOG_TAG, profession.toString());
-                                    Log.e(LOG_TAG, e.toString());
+                                    //Log.e(LOG_TAG, profession.toString());
+                                    //Log.e(LOG_TAG, e.toString());
                                 }
 
                             }
                         }
-                        Log.e(LOG_TAG, String.valueOf(response.getInt("code")));
-                        Log.e(LOG_TAG, String.valueOf(response.getJSONObject("data").getInt("total")));
+                        //Log.e(LOG_TAG, String.valueOf(response.getInt("code")));
+                        //Log.e(LOG_TAG, String.valueOf(response.getJSONObject("data").getInt("total")));
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+                    TaskScheduler.runningThreads--;
+                }
 
+                @Override
+                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                    TaskScheduler.runningThreads--;
                 }
             });
         } catch (Exception e) {

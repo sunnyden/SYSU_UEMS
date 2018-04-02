@@ -60,6 +60,9 @@ public class UpcomingCourseViewHolder extends RecyclerView.ViewHolder {
             courseTime.setText(String.format(context.getString(R.string.minutes_later), minutes));
         }
         courseClassroom.setText(course.classroom);
+        if (course.classroom.length() == 0) {
+            courseClassroom.setText(R.string.unknown);
+        }
         courseTeacher.setText(course.teacher);
     }
 }
