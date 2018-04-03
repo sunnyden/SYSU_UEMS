@@ -11,5 +11,6 @@ Third-party university education management system for Sun Yat-Sen University
 * Teach Plan
 * Wearable Support
 
-## To be implemented
-* Course Database
+## Todo
+* Code refactoring
+* ~~Course Database~~(Unnecessary maybe?)
