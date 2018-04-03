@@ -304,7 +304,7 @@
         
     <string name="pref_keep_alive">啟用KeepAlive服務</string>
         
-    <string name="pref_description_keep_alive" translatable="false">測試功能，用於保持CAS認證session為登錄狀態</string>
+    <string name="pref_description_keep_alive">測試功能，用於保持CAS認證session為登錄狀態</string>
         
     <string name="pref_about">關於</string>
         

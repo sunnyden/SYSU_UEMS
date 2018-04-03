@@ -165,7 +165,7 @@
     <string name="course_list">课程列表</string>
     <string name="pref_opensource_ack">开源项目致谢</string>
     <string name="pref_keep_alive">启用KeepAlive服务</string>
-    <string name="pref_description_keep_alive" translatable="false">测试功能，用于保持CAS认证session为登录状态</string>
+    <string name="pref_description_keep_alive">测试功能，用于保持CAS认证session为登录状态</string>
     <string name="pref_about">关于</string>
     <string name="download_started">开始下载</string>
     <string name="update_to">更新到%s</string>
