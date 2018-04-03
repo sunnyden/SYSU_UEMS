@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
         android:layout_marginStart="24dp"
-        android:text="Enter captcha to continue." />
+        android:text="@string/enter_captcha" />
 
     <ImageView
         android:id="@+id/diag_captcha_img"

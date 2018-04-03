@@ -50,7 +50,7 @@
             android:layout_alignBottom="@id/course_id"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="10dp"
-            android:text="PASSED"
+            android:text="@string/passed"
             android:textColor="@android:color/holo_green_dark"
             android:textSize="12sp"
             android:visibility="invisible" />

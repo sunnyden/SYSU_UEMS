@@ -43,7 +43,7 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_marginStart="10dp"
-            android:text="Ongoing Course"
+            android:text="@string/ongoing_course"
             android:textSize="10sp" />
 
         <TextView

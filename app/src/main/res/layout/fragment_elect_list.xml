@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:gravity="center"
-            android:text="Selected Course"
+            android:text="@string/selected_course"
             android:textSize="20sp" />
 
         <View
@@ -63,7 +63,7 @@
             android:layout_below="@id/selCourseList"
             android:layout_marginTop="15dp"
             android:gravity="center"
-            android:text="Available Course"
+            android:text="@string/available_course"
             android:textSize="20sp" />
 
         <View

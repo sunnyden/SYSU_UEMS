@@ -92,7 +92,7 @@
             android:text="Teacher" />
 
         <ImageView
-            android:id="@+id/elect_img_availibility"
+            android:id="@+id/elect_img_availability"
             android:layout_width="19dp"
             android:layout_height="19dp"
             android:layout_alignStart="@id/elect_course_name"
@@ -104,10 +104,10 @@
             android:id="@+id/elect_text_availibility_hint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@id/elect_img_availibility"
-            android:layout_toEndOf="@id/elect_img_availibility"
+            android:layout_alignTop="@id/elect_img_availability"
+            android:layout_toEndOf="@id/elect_img_availability"
             android:paddingStart="5dp"
-            android:text="Availibility:" />
+            android:text="@string/availability_hint" />
 
         <TextView
             android:id="@+id/elect_text_availibility"
@@ -123,7 +123,7 @@
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/elect_img_availibility"
+            android:layout_below="@+id/elect_img_availability"
             android:paddingEnd="10dp"
             android:paddingStart="10dp" />
 
@@ -158,7 +158,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="10dp"
                 android:layout_toEndOf="@+id/imageView8"
-                android:text="Cancel selection" />
+                android:text="@string/cancel_course" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -183,7 +183,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="10dp"
                 android:layout_toEndOf="@+id/ic_select_img"
-                android:text="Select it" />
+                android:text="@string/select_course" />
         </RelativeLayout>
 
     </RelativeLayout>

@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~  Copyright (C) 2013 - 2018, Haoqing Deng <dhq.sunny@gmail.com>
+  ~
+  ~  This file is part of the SYSU UEMS.
+  ~
+  ~  SYSU UEMS is free software; you can redistribute it and/or modify
+  ~  it under the terms of the GNU General Public License as published by
+  ~  the Free Software Foundation; either version 3 of the License, or
+  ~  (at your option) any later version.
+  ~
+  ~  SYSU UEMS is distributed in the hope that it will be useful,
+  ~  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  ~  GNU General Public License for more details.
+  ~
+  ~  You should have received a copy of the GNU General Public License
+  ~  along with SYSU UEMS; see the file COPYING. If not, see
+  ~  <http://www.gnu.org/licenses/>.
+  -->
+
+<resources>
+        
+    <string name="app_name">中大教務</string>
+        
+    <string name="prompt_netID">NetID</string>
+        
+    <string name="prompt_captcha">驗證碼</string>
+        
+    <string name="prompt_password">密碼</string>
+        
+    <string name="action_sign_in">登錄</string>
+        
+    <string name="action_sign_in_short">登錄</string>
+        
+    <string name="title_activity_casauth">中央身份驗證服務(CAS)</string>
+        
+    <string name="monday">週一</string>
+        
+    <string name="tuesday">週二</string>
+        
+    <string name="wednesday">週三</string>
+        
+    <string name="thursday">週四</string>
+        
+    <string name="friday">週五</string>
+        
+    <string name="saturday">週六</string>
+        
+    <string name="sunday">週日</string>
+        
+    <string name="section_brief">%s 第%s-%s節\n%s~%s</string>
+        
+    <string name="add_memo">添加備忘</string>
+        
+    <string name="menu_login">登錄</string>
+        
+    <string name="menu_sync">同步數據</string>
+        
+    <string name="menu_schedule">課程表</string>
+        
+    <string name="menu_achievement">成績查詢</string>
+        
+    <string name="menu_lesson">課程庫查詢</string>
+        
+    <string name="menu_uems">教務系統</string>
+        
+    <string name="menu_actions">操作</string>
+        
+    <string name="menu_curriculum">專業培養計劃</string>
+        
+    <string name="menu_feedback">反饋</string>
+        
+    <string name="menu_settings">設置</string>
+        
+    <string name="menu_select">選課系統</string>
+        
+    <string name="menu_logout">退出登錄</string>
+        
+    <string name="captcha_incorrect">驗證碼錯誤</string>
+        
+    <string name="error_incorrect_password">用戶名或密碼錯誤</string>
+        
+    <string name="action_settings">設置</string>
+        
+    <string name="gpa">績點</string>
+        
+    <string name="credits">%s學分</string>
+        
+    <string name="third_semester">第三學期</string>
+        
+    <string name="second_semester">第二學期</string>
+        
+    <string name="first_semester">第一學期</string>
+        
+    <string name="total_lessons">已通過科目:</string>
+        
+    <string name="total_credit">總學分數:</string>
+        
+    <string name="minutes_later">%d分鐘後</string>
+        
+    <string name="seconds_later">即將開始</string>
+        
+    <string name="navigation_drawer_open">打開導航菜單</string>
+        
+    <string name="navigation_drawer_close">關閉導航菜單</string>
+        
+    <string name="error_invalid_email">郵件地址錯誤</string>
+        
+    <string name="error_invalid_password">密碼長度過短</string>
+        
+    <string name="error_field_required">該項必填</string>
+        
+    <string name="permission_rationale">需要聯繫人權限</string>
+        
+    <string name="title_activity_view_course_details">查看課程信息</string>
+        
+    <string name="title_activity_scrolling">滾動活動</string>
+        
+    <string name="menu_dashboard">概覽</string>
+        
+    <string name="msg_welcome">你好, %s.感謝使用中山大學第三方教務系統（Android）！在此之前，我們需要一些信息以便繼續。 </string>
+        
+    <string name="err_sync_school_calendar">抱歉，本程序無法通過遠程服務器取得該學期校歷，你可以嘗試選擇另一個學期進行同步，或手工設置該學期的開始日期，程序將會嘗試計算校歷。 </string>
+        
+    <string name="spring_semaster">春季學期</string>
+        
+    <string name="fall_semaster">秋季學期</string>
+        
+    <string name="score">分數</string>
+        
+    <string name="teacher">教師:</string>
+        
+    <string name="grade_point">績點:</string>
+        
+    <string name="rank">排名:</string>
+        
+    <string name="availability">%d / %d (剩餘/總人數)</string>
+        
+    <string name="continue_with_netid">以 %s 身份繼續</string>
+        
+    <string name="ok">好的</string>
+        
+    <string name="continue_str">繼續</string>
+        
+    <string name="confirmation">確認</string>
+        
+    <string name="week_dayofweek">第%d週, %s</string>
+        
+    <string name="confirm">確認</string>
+        
+    <string name="warning">警告</string>
+        
+    <string name="algrithm_not_accurete">你正在嘗試切換GPA算法至4分制，我們不保證該算法計算的準確性。 </string>
+        
+    <string name="cancel">取消</string>
+        
+    <string name="select_hint">你真的要退選該課程嗎？ </string>
+        
+    <string name="delete_hint">你真的要退選該課程嗎？ </string>
+        
+    <string name="press_to_exit">在按一次返回鍵退出</string>
+        
+    <string name="title">標題</string>
+        
+    <string name="notes">內容（支持MarkDown）</string>
+        
+    <string name="save">保存</string>
+        
+    <string name="action_title_add_memo">添加備忘錄</string>
+        
+    <string name="link_course">關聯課程</string>
+        
+    <string name="cancel_selection">刪除已選圖片</string>
+        
+    <string name="memo_stored">成功保存</string>
+        
+    <string name="memo_title_content_empty">題目或內容為空</string>
+        
+    <string name="take_photo">拍照</string>
+        
+    <string name="choose_photo">選擇照片</string>
+        
+    <string name="title_activity_view_memo">查看備忘錄</string>
+        
+    <string name="memo_deleted">備忘已刪除</string>
+        
+    <string name="undo">撤銷</string>
+        
+    <string name="title_activity_settings">設置</string>
+    <string name="pref_header_general">通用</string>
+        
+    <string name="desc_about">第三方教務系統</string>
+        
+    <string-array name="pref_example_list_titles">
+                
+        <item>Always</item>
+                
+        <item>When possible</item>
+                
+        <item>Never</item>
+            
+    </string-array>
+        
+    <string-array name="pref_example_list_values">
+                
+        <item>1</item>
+                
+        <item>0</item>
+                
+        <item>-1</item>
+            
+    </string-array>
+        
+    <string-array name="pref_sync_frequency_titles">
+                
+        <item>15 minutes</item>
+                
+        <item>30 minutes</item>
+                
+        <item>1 hour</item>
+                
+        <item>3 hours</item>
+                
+        <item>6 hours</item>
+                
+        <item>Never</item>
+            
+    </string-array>
+        
+    <string-array name="pref_sync_frequency_values">
+                
+        <item>15</item>
+                
+        <item>30</item>
+                
+        <item>60</item>
+                
+        <item>180</item>
+                
+        <item>360</item>
+                
+        <item>-1</item>
+            
+    </string-array>
+
+        
+    <string-array name="list_preference_entries">
+                
+        <item>Entry 1</item>
+                
+        <item>Entry 2</item>
+                
+        <item>Entry 3</item>
+            
+    </string-array>
+
+        
+    <string-array name="list_preference_entry_values">
+                
+        <item>1</item>
+                
+        <item>2</item>
+                
+        <item>3</item>
+            
+    </string-array>
+
+        
+    <string-array name="multi_select_list_preference_default_value" />
+        
+    <string name="new_version">軟件更新</string>
+        
+    <string name="disclaimer">免責聲明：本軟件為獨立於“中山大學”的第三方開發項目，應用內的數據由中山大學相關係統提供，軟件開發者不對軟件所提供數據承擔任何責任。 </string>
+        
+    <string name="unknown">未知</string>
+        
+    <string name="week">第%d週</string>
+        
+    <string name="courseType">課程類型</string>
+        
+    <string name="course_label">課程類型</string>
+        
+    <string name="event_added">成功添加到日程</string>
+        
+    <string name="toast_credit">%s, %.1f學分</string>
+        
+    <string name="curriculum">培養計劃</string>
+        
+    <string name="requirement">培養要求</string>
+        
+    <string name="degree_limit">學位及修讀年限</string>
+        
+    <string name="graduate">畢業條件</string>
+        
+    <string name="maj_funda_course">基礎課程</string>
+        
+    <string name="maj_core_course">核心課程</string>
+        
+    <string name="maj_featured">特色課程</string>
+        
+    <string name="course_list">課程列表</string>
+        
+    <string name="pref_opensource_ack">開源項目致謝</string>
+        
+    <string name="pref_keep_alive">啟用KeepAlive服務</string>
+        
+    <string name="pref_description_keep_alive" translatable="false">測試功能，用於保持CAS認證session為登錄狀態</string>
+        
+    <string name="pref_about">關於</string>
+        
+    <string name="download_started">開始下載</string>
+        
+    <string name="update_to">更新到%s</string>
+        
+    <string name="title_activity_updater">軟件更新</string>
+        
+    <string name="title_activity_feedback">反饋</string>
+        
+    <string name="name_opt">姓名（可選）</string>
+        
+    <string name="contact_opt">聯繫方式（可選）</string>
+        
+    <string name="fb_req">內容（必須）</string>
+        
+    <string name="fb_err">反饋發送失敗，請檢查您的網絡連接</string>
+        
+    <string name="fb_success">感謝您的反饋</string>
+        
+    <string name="fb_empt">內容為空！ </string>
+        
+    <string name="title_activity_course_list">課程列表</string>
+        
+    <string name="title_activity_course_plan_list">課程計劃</string>
+        
+    <string name="plan_desc">%.1f學分, %d學時</string>
+        
+    <string name="semester">學期:</string>
+        
+    <string name="sync_now">立刻同步</string>
+        
+    <string name="enter_captcha">輸入驗證碼以繼續</string>
+        
+    <string name="selected_course">已選課程</string>
+        
+    <string name="available_course">可選課程</string>
+        
+    <string name="one_day">1天</string>
+        
+    <string name="three_days">3天</string>
+        
+    <string name="five_days">5天</string>
+        
+    <string name="overview">概覽</string>
+        
+    <string name="course_passed">已通過課程:</string>
+        
+    <string name="use_another_gpa">使用另一GPA算法</string>
+        
+    <string name="passed">通過</string>
+        
+    <string name="availability_hint">空位:</string>
+        
+    <string name="cancel_course">退選</string>
+        
+    <string name="select_course">選課</string>
+        
+    <string name="ongoing_course">當前課程</string>
+        
+    <string name="student_abnormal">系統狀態異常</string>
+        
+    <string name="abnormal_code">錯誤代碼:</string>
+        
+    <string name="message_hint">提示信息:</string>
+        
+    <string name="upcoming_course">即將開始課程</string>
+</resources>

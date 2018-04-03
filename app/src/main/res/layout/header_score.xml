@@ -44,7 +44,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginEnd="10dp"
             android:layout_marginStart="10dp"
-            android:text="Overview"
+            android:text="@string/overview"
             android:textColor="@android:color/black"
             android:textStyle="bold" />
 
@@ -102,7 +102,7 @@
             android:layout_alignTop="@+id/cardView"
             android:layout_marginStart="7dp"
             android:layout_toEndOf="@+id/cardView"
-            android:text="Total Credits:" />
+            android:text="@string/total_credit" />
 
         <TextView
             android:id="@+id/textView12"
@@ -111,7 +111,7 @@
             android:layout_alignStart="@+id/textView11"
             android:layout_below="@+id/total_credit"
             android:layout_marginTop="4dp"
-            android:text="Course Passed:" />
+            android:text="@string/course_passed" />
 
         <TextView
             android:id="@+id/total_credit"
@@ -168,7 +168,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="9dp"
                 android:layout_toEndOf="@+id/imageView2"
-                android:text="Use Another GPA System" />
+                android:text="@string/use_another_gpa" />
         </RelativeLayout>
 
     </RelativeLayout>

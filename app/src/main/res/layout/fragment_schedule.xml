@@ -70,7 +70,7 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
-                android:text="1 Day"
+                android:text="@string/one_day"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textStyle="bold" />
         </android.support.v7.widget.CardView>
@@ -115,7 +115,7 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
-                android:text="3 Days"
+                android:text="@string/three_days"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textStyle="bold" />
         </android.support.v7.widget.CardView>
@@ -160,7 +160,7 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
-                android:text="5 Days"
+                android:text="@string/five_days"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textStyle="bold" />
         </android.support.v7.widget.CardView>

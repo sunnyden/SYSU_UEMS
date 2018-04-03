@@ -44,7 +44,7 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_marginStart="10dp"
-            android:text="Upcoming Course"
+            android:text="@string/upcoming_course"
             android:textSize="10sp" />
 
         <TextView

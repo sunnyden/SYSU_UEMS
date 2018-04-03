@@ -140,8 +140,8 @@
 
     <string name="pref_opensource_ack">Open source acknowledgments</string>
 
-    <string name="pref_keep_alive" translatable="false">Enable keep-alive service</string>
-    <string name="pref_description_keep_alive" translatable="false">
+    <string name="pref_keep_alive">Enable keep-alive service</string>
+    <string name="pref_description_keep_alive">
         Staging function, enable it to keep your CAS auth session alive
     </string>
 
@@ -215,7 +215,7 @@
     <string name="download_started">Download started.</string>
     <string name="update_to">Update to %s</string>
     <string name="title_activity_updater">Updater</string>
-    <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_activity_main2" translatable="false">Main2Activity</string>
     <string name="title_activity_feedback">Feedback</string>
     <string name="name_opt">Name (Optional)</string>
     <string name="contact_opt">Contact (Optional)</string>
@@ -224,10 +224,30 @@
     <string name="fb_success">Thanks for your feedback!</string>
     <string name="fb_empt">Content is empty!</string>
     <string name="title_activity_course_list">CourseListActivity</string>
-    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="section_format" translatable="false">Hello World from section: %1$d</string>
     <string name="title_activity_course_plan_list">CoursePlanListActivity</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
-    <string name="tab_text_3">Tab 3</string>
+    <string name="tab_text_1" translatable="false">Tab 1</string>
+    <string name="tab_text_2" translatable="false">Tab 2</string>
+    <string name="tab_text_3" translatable="false">Tab 3</string>
     <string name="plan_desc">%.1f Credits, %d Schooling Time</string>
+    <string name="semester">Semester:</string>
+    <string name="sync_now">Sync Now</string>
+    <string name="enter_captcha">Enter captcha to continue.</string>
+    <string name="selected_course">Selected Course</string>
+    <string name="available_course">Available Course</string>
+    <string name="one_day">1 Day</string>
+    <string name="three_days">3 Days</string>
+    <string name="five_days">5 Days</string>
+    <string name="overview">Overview</string>
+    <string name="course_passed">Course Passed:</string>
+    <string name="use_another_gpa">Use Another GPA System</string>
+    <string name="passed">PASSED</string>
+    <string name="availability_hint">Availability:</string>
+    <string name="cancel_course">Cancel selection</string>
+    <string name="select_course">Select</string>
+    <string name="ongoing_course">Ongoing Course</string>
+    <string name="student_abnormal">Student Status Abnormal</string>
+    <string name="abnormal_code">Error Code:</string>
+    <string name="message_hint">Messages:</string>
+    <string name="upcoming_course">Upcoming Course</string>
 </resources>
