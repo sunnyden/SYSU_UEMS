@@ -140,9 +140,9 @@
 
     <string name="pref_opensource_ack">Open source acknowledgments</string>
 
-    <string name="pref_title_social_recommendations" translatable="false">Enable social recommendations</string>
-    <string name="pref_description_social_recommendations" translatable="false">Recommendations for people to contact
-        based on your message history
+    <string name="pref_keep_alive" translatable="false">Enable keep-alive service</string>
+    <string name="pref_description_keep_alive" translatable="false">
+        Staging function, enable it to keep your CAS auth session alive
     </string>
 
     <string name="pref_title_display_name" translatable="false">Display name</string>
