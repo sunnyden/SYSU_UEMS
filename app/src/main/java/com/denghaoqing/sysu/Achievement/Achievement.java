@@ -113,6 +113,7 @@ public class Achievement {
     }
 
     public void pullScoreFromServer() {
+        Log.e(LOG_TAG,"pullScoreFromServer");
         CookieHelper cookieHelper = new CookieHelper(context);
         AsyncHttpClient client = new AsyncHttpClient();
         client.setCookieStore(cookieHelper);
@@ -129,7 +130,7 @@ public class Achievement {
                             try {
                                 JSONObject score = jsonArray.getJSONObject(i);
                                 ContentValues contentValues = new ContentValues();
-                                contentValues.put(AchievementDatabase.colRank, score.getString("rank").split("/")[0]);
+                                contentValues.put(AchievementDatabase.colRank, score.getString("gradeMajorRank").split("/")[0]);
                                 contentValues.put(AchievementDatabase.colCateID, score.getString("scoCourseCategory"));
                                 contentValues.put(AchievementDatabase.colCourseName, score.getString("scoCourseName"));
                                 contentValues.put(AchievementDatabase.colCourseID, score.getString("scoCourseNumber"));
@@ -139,7 +140,7 @@ public class Achievement {
                                 contentValues.put(AchievementDatabase.colSchoolYear, score.getString("scoSchoolYear"));
                                 contentValues.put(AchievementDatabase.colSemester, score.getString("scoSemester"));
                                 contentValues.put(AchievementDatabase.colTeacher, score.getString("scoTeacherName"));
-                                contentValues.put(AchievementDatabase.colTotalPeople, score.getString("total"));
+                                contentValues.put(AchievementDatabase.colTotalPeople, score.getString("teachClassRank").split("/")[1]);
                                 ContentValues categoryCV = new ContentValues();
                                 categoryCV.put(AchievementDatabase.colCategoryId, score.getString("scoCourseCategory"));
                                 categoryCV.put(AchievementDatabase.colCategoryName, score.getString("scoCourseCategoryName"));

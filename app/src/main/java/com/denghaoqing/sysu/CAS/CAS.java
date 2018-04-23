@@ -279,6 +279,7 @@ public class CAS {
                     requestFinish = true;
                     if (authSuccess) {
                         UEMS uems = new UEMS(context);
+                        CAS.LOGIN = true;
                         uems.getBasicStudentInfo();
 
                     }
@@ -348,6 +349,7 @@ public class CAS {
                     }
                     requestFinish = true;
                     if (authSuccess) {
+                        CAS.LOGIN = true;
                         UEMS uems = new UEMS(context);
                         uems.getBasicStudentInfo();
                         SharedPreferences sp = context.getSharedPreferences(PREF_KEY_STORE, Context.MODE_PRIVATE);

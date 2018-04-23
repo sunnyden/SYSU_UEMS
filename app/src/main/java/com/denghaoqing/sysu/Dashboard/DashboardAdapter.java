@@ -22,6 +22,7 @@ package com.denghaoqing.sysu.Dashboard;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -81,12 +82,6 @@ public class DashboardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             eventList.add(TYPE_UPCOMING_COURSE);
         }
 
-        /*
-        *
-        * TODO implement ongoing course later on at EXACTLY this place(for the sequence of feeds)
-        *
-        * */
-
 
         ArrayList<Course> coursesThisWeek = schedule.getWeekRemainingCourses(Calendar.getInstance(), 0); //Week's course
         ArrayList<Course> coursesNextWeek = schedule.getWeekRemainingCourses(Calendar.getInstance(), 1);
@@ -125,7 +120,11 @@ public class DashboardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @Override
     public int getItemCount() {
-        return eventList.size() + memoArrayList.size() - 1;
+        if(memoArrayList.size()!=0){
+            return eventList.size() + memoArrayList.size() - 1;
+        }else{
+            return eventList.size();
+        }
     }
 
     @Override

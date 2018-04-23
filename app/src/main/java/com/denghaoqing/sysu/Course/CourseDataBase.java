@@ -60,6 +60,19 @@ public class CourseDataBase extends SQLiteOpenHelper {
                 "period INTEGER," +
                 "course_type INTEGER," +
                 "semester VARCHAR(10))");
+        sqLiteDatabase.execSQL("create table if not exists score(" +
+                "id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
+                "courseId VARCHAR(32) UNIQUE," +   //I think it should be unique, for indexing
+                "courseName VARCHAR(128)," +
+                "teacher VARCHAR(32)," +
+                "score FLOAT," +
+                "point FLOAT," +
+                "cate_id INTEGER," +
+                "credit FLOAT," +
+                "rank INTEGER," +
+                "total_people INTEGER," +
+                "school_year VARCHAR(16)," +
+                "semester INTEGER)");
     }
 
     @Override

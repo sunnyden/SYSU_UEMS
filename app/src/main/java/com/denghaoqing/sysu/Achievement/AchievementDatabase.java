@@ -22,6 +22,7 @@ package com.denghaoqing.sysu.Achievement;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.denghaoqing.sysu.Course.CourseDataBase;
 
@@ -48,22 +49,5 @@ public class AchievementDatabase extends CourseDataBase {
         super(context);
     }
 
-    @Override
-    public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        super.onCreate(sqLiteDatabase);
-        sqLiteDatabase.execSQL("create table if not exists score(" +
-                "id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
-                "courseId VARCHAR(32) UNIQUE," +   //I think it should be unique, for indexing
-                "courseName VARCHAR(128)," +
-                "teacher VARCHAR(32)," +
-                "score FLOAT," +
-                "point FLOAT," +
-                "cate_id INTEGER," +
-                "credit FLOAT," +
-                "rank INTEGER," +
-                "total_people INTEGER," +
-                "school_year VARCHAR(16)," +
-                "semester INTEGER)");
-    }
 
 }

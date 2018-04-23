@@ -213,7 +213,12 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            try{
+                Intent mIntent = new Intent(MainActivity.this, SettingsActivity.class);
+                startActivity(mIntent);
+            }catch (Exception e){
+
+            }
         } else if (id == R.id.action_back_today) {
             try {
                 scheduleFragment.gotoToday();

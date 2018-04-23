@@ -150,7 +150,6 @@ public class Course {
                             categoryCV.put(AchievementDatabase.colCategoryName, courseType.getString("courseTypeName"));
                             try {
                                 database.insertOrThrow(AchievementDatabase.dbCourseType, null, categoryCV);
-                                database.close();
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -162,6 +161,10 @@ public class Course {
 
                 } catch (Exception e) {
                     handler.onTaskFailure();
+                } finally {
+                    if(database.isOpen()){
+                        database.close();
+                    }
                 }
 
             }
